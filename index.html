@@ -438,6 +438,105 @@ nav {
   color: var(--muted); font-weight: 400;
 }
 
+
+/* ── Review ticker ── */
+.reviews-section {
+  position: relative; z-index: 1;
+  padding: 5rem 0;
+  overflow: hidden;
+}
+.reviews-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 5%;
+}
+.reviews-header h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.75rem;
+}
+.reviews-header h2 span { color: var(--gold); }
+.reviews-header p {
+  color: var(--muted);
+  font-size: 1rem;
+  font-weight: 300;
+}
+.reviews-container {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+}
+.reviews-track {
+  display: flex;
+  width: max-content;
+  gap: 1.25rem;
+  animation: reviewTicker 70s linear infinite;
+  will-change: transform;
+  padding: 0.5rem 0;
+}
+.review-set {
+  display: flex;
+  gap: 1.25rem;
+  flex-shrink: 0;
+}
+.review-card {
+  width: clamp(280px, 32vw, 400px);
+  flex: 0 0 clamp(280px, 32vw, 400px);
+  min-height: 190px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--card);
+  border: 1px solid var(--card-bd);
+  border-radius: 14px;
+  transition: border-color 0.25s, transform 0.2s, background 0.25s;
+}
+.review-card:hover {
+  border-color: rgba(212,146,30,0.3);
+  background: rgba(212,146,30,0.05);
+  transform: translateY(-3px);
+}
+.review-stars {
+  color: var(--gold);
+  letter-spacing: 0.15em;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+.review-text {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  font-weight: 300;
+  margin: 0 0 1.25rem;
+}
+.review-author {
+  color: var(--muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+@keyframes reviewTicker {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 0.625rem)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .reviews-track { animation: none; transform: translateX(0); }
+}
+@media (max-width: 640px) {
+  .reviews-section { padding: 4rem 0; }
+  .reviews-track, .review-set { gap: 1rem; }
+  .review-card {
+    width: 280px;
+    flex-basis: 280px;
+    min-height: 190px;
+  }
+}
+
 /* ── Features ── */
 .features-section {
   position: relative; z-index: 1;
@@ -784,6 +883,17 @@ footer .footer-wordmark {
   </div>
 </div>
 
+<!-- ── REVIEWS ── -->
+<section class="reviews-section" id="reviews">
+  <div class="reviews-header">
+    <h2>WHAT FANS ARE <span>SAYING</span></h2>
+    <p>Real feedback from the people who use Pigskins.</p>
+  </div>
+  <div class="reviews-container" aria-label="Pigskins user reviews">
+    <div class="reviews-track" id="reviews-track"></div>
+  </div>
+</section>
+
 <!-- ── FEATURES ── -->
 <section class="features-section" id="features">
   <div class="features-header">
@@ -817,9 +927,9 @@ footer .footer-wordmark {
       <p>Browse historical archives stretching back to 1869. Matchups, rankings, draft picks, etc all in one place.</p>
     </div>
     <div class="feat-card">
-      <div class="feat-icon">🔔</div>
-      <h3>Game Alerts</h3>
-      <p>Get notified for kickoff, big scoring plays, and final scores for the games that matter to you.</p>
+      <div class="feat-icon">🏆</div>
+      <h3>Community</h3>
+      <p>Submit your very own top 25 ballots, and compete in a season-long Pick'Ems challenge! Prove you know ball.</p>
     </div>
   </div>
 </section>
@@ -860,6 +970,73 @@ footer .footer-wordmark {
   </div>
   <p>© 2026 Pigskins App &nbsp;·&nbsp; <a href="https://sites.google.com/view/pigskins/privacy" target="_blank">Privacy Policy</a> &nbsp;·&nbsp; <a href="mailto:gritcfb@gmail.com">Contact</a></p>
 </footer>
+
+
+<script>
+  // Update this array to add, remove, or edit reviews shown on the site.
+  const reviews = [
+    { 
+      text: "Best App Ever", 
+      author: "Gage Wozencraft" 
+    },
+    {
+      text: "Great information and super easy to use. It’s been my go to app for checking stats and schedules so far this season.",
+      author: "Case5678"
+    },
+    { 
+      text: "Not only does the app do everything you want it to from an information standpoint, it provides exclusive journalism articles and is updated so so so so often for the better. Use this instead of ESPN this season and every season after!", 
+      author: "Action-Jackson1421" 
+    },
+    { 
+      text: "Genuinely the best college football app. Interface is beautiful and clean, and it has everything you could ask for and more. Amazing app 🔥", 
+      author: "Goofer" 
+    },
+    { 
+      text: "This is my favorite app for everything College Football, layout is nice, and my favorite part is you can see a chart of the times and channels of every game", 
+      author: "RAT Rundown" 
+    },
+    { 
+      text: "Looks great and has tons of information about each team!", 
+      author: "bballer.2k20" 
+    },
+    { 
+      text: "The best thing that's ever happened to college football. No more googling, no more searching through 12 different apps for a stat, no more ESPN. This thing has everything I need and more", 
+      author: "Jackson Branding" 
+    },
+    { 
+      text: "🔥🔥🔥🔥", 
+      author: "jacob westerfield" 
+    },
+    { 
+      text: "incredible interface", 
+      author: "Barrett Swope" 
+    },
+    { 
+      text: "It gives good detail, smooth interface and movement between screens, and it shows me things I’d normally have to look up like a team’s record against another. It makes a LOT of things much more convenient", 
+      author: "nickster617" 
+    },
+    { 
+      text: "best app for college football and it's not even close", 
+      author: "Jobe Harper" 
+    }
+  ];
+
+  const reviewCard = ({ text, author }) => `
+    <article class="review-card">
+      <div>
+        <div class="review-stars" aria-label="5 out of 5 stars">★★★★★</div>
+        <p class="review-text">“${text}”</p>
+      </div>
+      <div class="review-author">${author}</div>
+    </article>
+  `;
+
+  const reviewMarkup = reviews.map(reviewCard).join('');
+  document.getElementById('reviews-track').innerHTML = `
+    <div class="review-set">${reviewMarkup}</div>
+    <div class="review-set" aria-hidden="true">${reviewMarkup}</div>
+  `;
+</script>
 
 </body>
 </html>
